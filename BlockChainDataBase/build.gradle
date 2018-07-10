@@ -1,0 +1,42 @@
+
+plugins {
+    id 'java'
+}
+
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+
+allprojects{
+    version '0.1'
+}
+
+project(':') {
+    task Sql(type: JavaExec) {
+        classpath = sourceSets.main.runtimeClasspath
+        main = 'org.blockdata.db.Sqlite'
+    }
+
+    task cita(type: JavaExec) {
+        classpath = sourceSets.main.runtimeClasspath
+        main = 'org.blockdata.chain.CitaChain'
+    }
+
+    task getdata(type: JavaExec) {
+        classpath = sourceSets.main.runtimeClasspath
+        main = 'org.blockdata.core.BlockToDb'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12';
+    compile fileTree(dir: 'jars', include: ['*.jar'])
+    compile 'org.xerial:sqlite-jdbc:3.23.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+}
